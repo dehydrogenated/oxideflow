@@ -41,7 +41,9 @@ export MKL_NUM_THREADS="$OMP_NUM_THREADS"
 # driver-reported gap between allocated and reserved-but-unallocated memory pointed at
 # fragmentation rather than raw need. This is PyTorch's own suggested mitigation from that
 # error message. Inert on CPU, so it is set unconditionally.
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+# Overridable (set it empty to disable) so it can be ruled in or out when a job aborts
+# inside the CUDA stack -- which is exactly how CHGNet-0.3.0 fails on this V100.
+export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF-expandable_segments:True}"
 
 # Device comes from what the scheduler actually granted, never from a default -- so a
 # forgotten --gres=gpu shows up as "device cpu" in the banner below instead of silently
