@@ -8,6 +8,8 @@ The point is speed with control: any of 22 MLIPs runs over the same chain, and t
 
 ![H adsorbing on a reduced TiO₂(110) surface](docs/demos/tio2_h_adsorption_o2c_vacancy.gif)
 
+*H adsorption on TiO₂(110) — MACE-mh1-omat, 92 steps in 292.7 s on a 192-atom slab*
+
 ---
 
 ## What it does
