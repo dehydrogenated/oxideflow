@@ -15,14 +15,28 @@ The question this answers: **when you screen an oxide surface with an MLIP inste
 ## What it does
 
 ```mermaid
-graph LR
-    A[bulk cell] -->|relax cell + positions| B[relaxed bulk]
-    B -->|cut facet, supercell,<br/>freeze bottom| C[slab]
-    C -->|relax| D[relaxed slab]
-    D -->|enumerate every symmetry-<br/>distinct surface oxygen| E[N vacancy candidates]
-    E -->|relax each, keep lowest| F[vacancy]
-    F -->|place fragment at<br/>ontop / bridge / hollow| G[M adsorbate candidates]
-    G -->|relax each, keep lowest| H[E_ads]
+graph TD
+    A["bulk cell<br/>from data/structures"] -->|"relax cell + positions"| B["relaxed bulk"]
+    B -->|"cut facet · supercell · freeze bottom"| C["relaxed slab"]
+
+    subgraph SA ["A · oxygen vacancy"]
+        direction TB
+        D["enumerate every symmetry-distinct<br/>surface oxygen"] --> E["relax every candidate"]
+        E --> F["lowest-energy vacancy<br/>E_vac"]
+    end
+
+    subgraph SB ["B · adsorption"]
+        direction TB
+        G["place fragment at<br/>ontop · bridge · hollow sites"] --> H["relax every candidate"]
+        H --> I["lowest-energy site<br/>E_ads"]
+    end
+
+    C ==> D
+    C -.->|"or start from the clean slab:<br/>run_stage.py adsorbate --from …"| G
+    F ==>|"default: the fragment lands on<br/>the relaxed vacancy slab"| G
+
+    classDef result fill:#dcece2,stroke:#1a6b47,stroke-width:2px,color:#0b2b1d
+    class F,I result
 ```
 
 The last two stages are **screenings**: every symmetry-distinct site is relaxed and the lowest-energy one is carried forward. Site enumeration is exhaustive, not hand-picked — symmetry reduction keeps the list small (rutile TiO₂(110) has ~40 exposed surface atoms but only 2 distinct surface oxygens).
@@ -94,8 +108,6 @@ data/structures/      25 materials as CIF + provenance JSON, committed so runs w
 docs/                 user guide and demo trajectories
 tests/                53 tests over the pure logic
 ```
-
-**The one architectural idea worth knowing:** `relax()` is a *process boundary*, not a function call. Models live in mutually incompatible conda environments, so the orchestrator never imports one. It writes a POSCAR and a job spec to disk, launches the model environment's own Python on `worker_relax.py`, and reads the result back. That is why adding a model is a registry entry rather than a dependency change, and why the test suite runs in seconds without a GPU.
 
 ---
 
@@ -176,8 +188,6 @@ runs/<run>/
 ```
 
 The tree is VESTA-friendly, and `OUTCAR` is a lightweight per-step energy log in a VASP-ish shape so existing tooling can read it.
-
-One thing that surprises everyone: `energy_error` in `divergence.jsonl` is often ~86 eV. That is a per-atom reference offset between two models, not a crash — MLIP total energies are not comparable across models, which is exactly why every energy here is built from same-calculator terms that cancel it.
 
 ---
 
