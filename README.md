@@ -1,8 +1,10 @@
-# oxide-workflow
+# OxideFlow
 
-Benchmarking machine-learned interatomic potentials (MLIPs) on oxide surfaces.
+Catalytic descriptors for oxide surfaces, computed with machine-learned interatomic potentials instead of DFT.
 
-The question this answers: **when you screen an oxide surface with an MLIP instead of DFT, where does the answer go wrong, and by how much?** One model acts as the reference and relaxes a four-stage chain — bulk → slab → oxygen vacancy → adsorbate — to produce ground truth. Every other model then reruns the same chain, and the geometry and energy divergence is recorded stage by stage. The headline outputs are the adsorption energy `E_ads` at the best site, the oxygen vacancy formation energy `E_vac`, and **ranking fidelity** — whether a candidate model picks the *same* site the reference did. A model can reproduce a geometry to 0.05 Å and still rank sites wrongly, and for screening the ranking is what matters.
+It mirrors a standard DFT surface study step for step — relax the bulk, cut and relax a slab, create an oxygen vacancy, place an adsorbate — but runs an MLIP at every stage instead. A bulk cell becomes an adsorption energy in minutes.
+
+The point is speed with control: any of 22 MLIPs runs over the same chain, and the settings that decide whether a model tracks DFT — facet, termination, slab thickness, supercell, vacuum, frozen fraction, adsorbate — are all exposed as flags. Two descriptors today, **A. oxygen vacancy formation energy** and **B. adsorption energy**; dissociation and hydrogen abstraction energies are next.
 
 ![H adsorbing on a reduced TiO₂(110) surface](docs/demos/tio2_h_adsorption_o2c_vacancy.gif)
 
@@ -27,7 +29,7 @@ graph TD
 
 Both branches are **screenings**: every symmetry-distinct site is relaxed and the lowest-energy one is carried forward. By default the adsorbate is placed on the relaxed *vacancy* slab, so the two run in sequence rather than independently. Site enumeration is exhaustive, not hand-picked — symmetry reduction keeps the list small (rutile TiO₂(110) has ~40 exposed surface atoms but only 2 distinct surface oxygens).
 
-Each candidate model runs under one or both protocols:
+To measure how far a model drifts, one model acts as the **reference** and produces the chain once; each **candidate** then reruns it under one or both protocols:
 
 | protocol | each stage is built from | measures |
 |---|---|---|
