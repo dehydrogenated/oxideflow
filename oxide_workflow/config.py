@@ -15,6 +15,8 @@ from dataclasses import dataclass
 class SlabConfig:
     miller_index: tuple[int, int, int] = (1, 1, 0)  
     min_slab_size: float = 12.0  # Å; ≈4 trilayers of rutile (110) 
+    # A minimum, not a target: SlabGenerator rounds c up to a whole number of atomic layers,
+    # so the real gap is always larger (4 -> 7.2 A, 8 -> 10.5 A, 20 -> 23.5 A on rutile(110)).
     min_vacuum_size: float = 20.0  
     termination_index: int = 1  # standard rutile(110)
     lll_reduce: bool = True # Allows equivalent basis with shorter closer-to-perpendicular lattice vectors, easier to work with
