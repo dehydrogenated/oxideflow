@@ -16,30 +16,20 @@ The question this answers: **when you screen an oxide surface with an MLIP inste
 
 ```mermaid
 graph TD
-    A["bulk cell<br/>from data/structures"] -->|"relax cell + positions"| B["relaxed bulk"]
-    B -->|"cut facet · supercell · freeze bottom"| C["relaxed slab"]
+    A["bulk cell"] -->|"relax cell + positions"| B["relaxed bulk"]
+    B -->|"cut facet · supercell · freeze"| C["relaxed slab"]
 
-    subgraph SA ["A · oxygen vacancy"]
-        direction TB
-        D["enumerate every symmetry-distinct<br/>surface oxygen"] --> E["relax every candidate"]
-        E --> F["lowest-energy vacancy<br/>E_vac"]
-    end
+    C ==>|"A · oxygen vacancy"| D["enumerate symmetry-<br/>distinct surface oxygens"]
+    D -->|"relax each"| E["lowest-energy vacancy<br/>E_vac"]
 
-    subgraph SB ["B · adsorption"]
-        direction TB
-        G["place fragment at<br/>ontop · bridge · hollow sites"] --> H["relax every candidate"]
-        H --> I["lowest-energy site<br/>E_ads"]
-    end
-
-    C ==> D
-    C -.->|"or start from the clean slab:<br/>run_stage.py adsorbate --from …"| G
-    F ==>|"default: the fragment lands on<br/>the relaxed vacancy slab"| G
+    C ==>|"B · adsorption"| F["place fragment at<br/>ontop · bridge · hollow"]
+    F -->|"relax each"| G["lowest-energy site<br/>E_ads"]
 
     classDef result fill:#dcece2,stroke:#1a6b47,stroke-width:2px,color:#0b2b1d
-    class F,I result
+    class E,G result
 ```
 
-The last two stages are **screenings**: every symmetry-distinct site is relaxed and the lowest-energy one is carried forward. Site enumeration is exhaustive, not hand-picked — symmetry reduction keeps the list small (rutile TiO₂(110) has ~40 exposed surface atoms but only 2 distinct surface oxygens).
+Both branches are **screenings**: every symmetry-distinct site is relaxed and the lowest-energy one is carried forward. By default the adsorbate is placed on the relaxed *vacancy* slab, so the two run in sequence rather than independently. Site enumeration is exhaustive, not hand-picked — symmetry reduction keeps the list small (rutile TiO₂(110) has ~40 exposed surface atoms but only 2 distinct surface oxygens).
 
 Each candidate model runs under one or both protocols:
 
