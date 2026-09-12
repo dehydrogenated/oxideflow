@@ -17,7 +17,7 @@ The point is speed with control: any of 22 MLIPs runs over the same chain, and t
 ```mermaid
 graph TD
     A["bulk cell"] -->|"relax cell + positions"| B["relaxed bulk"]
-    B -->|"cut facet · supercell · freeze"| C["relaxed slab"]
+    B -->|"cut facet · supercell · freeze · relax slab"| C["relaxed slab"]
 
     C ==>|"A · oxygen vacancy"| D["enumerate symmetry-<br/>distinct surface oxygens"]
     D -->|"relax each"| E["lowest-energy vacancy<br/>E_vac"]
