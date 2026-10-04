@@ -25,11 +25,11 @@
 # not a measured budget.
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/ovfe/sockeye_ovfe_vacuum_sweep.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/ovfe/sockeye_ovfe_vacuum_sweep.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 # All three MODELS in ovfe_convergence_common.py are needed for this sweep to be complete
 # -- note (not fatal) rather than exit, since run_sweep() itself now skips a model whose

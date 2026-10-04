@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <style>
+    text { font-family: Aptos, Arial, sans-serif; fill: #151a20; }
+    .title { font-size: 32px; font-weight: 700; }
+    .sub { font-size: 18px; fill: #66717d; }
+    .label { font-size: 18px; }
+    .value { font-size: 17px; font-weight: 700; }
+    .tick { font-size: 15px; fill: #7b8792; }
+    .note { font-size: 15px; fill: #66717d; }
+  </style>
+
+  <text class="title" x="28" y="38">Controlled wall-time comparison</text>
+  <text class="sub" x="28" y="66">Three adsorption relaxations per model · total elapsed time</text>
+  <rect x="986" y="19" width="184" height="58" rx="8" fill="#e5f7f5"/>
+  <text x="1005" y="48" font-size="27" font-weight="800" fill="#007f78">9.7× spread</text>
+  <text x="1005" y="68" font-size="13" fill="#48716f">fastest → slowest</text>
+
+  <g stroke="#e5e9ed" stroke-width="1">
+    <line x1="305" y1="92" x2="305" y2="648"/>
+    <line x1="440" y1="92" x2="440" y2="648"/>
+    <line x1="575" y1="92" x2="575" y2="648"/>
+    <line x1="710" y1="92" x2="710" y2="648"/>
+    <line x1="845" y1="92" x2="845" y2="648"/>
+    <line x1="980" y1="92" x2="980" y2="648"/>
+  </g>
+
+  <g>
+    <text class="label" x="28" y="115">Orb-v2</text>
+    <rect x="305" y="97" width="72.0" height="24" rx="3" fill="#009b93"/>
+    <text class="value" x="387" y="115" fill="#007f78">53 s</text>
+
+    <text class="label" x="28" y="153">CHGNet-0.3.0</text>
+    <rect x="305" y="135" width="143.2" height="24" rx="3" fill="#58bdb5"/>
+    <text class="value" x="458" y="153">106 s</text>
+
+    <text class="label" x="28" y="191">MACE-mh1-omat</text>
+    <rect x="305" y="173" width="166.5" height="24" rx="3" fill="#58bdb5"/>
+    <text class="value" x="481" y="191">123 s</text>
+
+    <text class="label" x="28" y="229">MACE-mh1-matpes</text>
+    <rect x="305" y="211" width="177.3" height="24" rx="3" fill="#58bdb5"/>
+    <text class="value" x="492" y="229">131 s</text>
+
+    <text class="label" x="28" y="267">MACE-mh1-oc20</text>
+    <rect x="305" y="249" width="179.2" height="24" rx="3" fill="#58bdb5"/>
+    <text class="value" x="494" y="267">133 s</text>
+
+    <text class="label" x="28" y="305">UMA-omat</text>
+    <rect x="305" y="287" width="213.0" height="24" rx="3" fill="#b9c4cb"/>
+    <text class="value" x="528" y="305">158 s</text>
+
+    <text class="label" x="28" y="343">UMA-oc22</text>
+    <rect x="305" y="325" width="217.2" height="24" rx="3" fill="#b9c4cb"/>
+    <text class="value" x="532" y="343">161 s</text>
+
+    <text class="label" x="28" y="381">SevenNet-omni-oc22</text>
+    <rect x="305" y="363" width="258.4" height="24" rx="3" fill="#b9c4cb"/>
+    <text class="value" x="573" y="381">191 s</text>
+
+    <text class="label" x="28" y="419">SevenNet-omni-oc20</text>
+    <rect x="305" y="401" width="259.3" height="24" rx="3" fill="#b9c4cb"/>
+    <text class="value" x="574" y="419">192 s</text>
+
+    <text class="label" x="28" y="457">SevenNet-omni-omat24</text>
+    <rect x="305" y="439" width="279.0" height="24" rx="3" fill="#b9c4cb"/>
+    <text class="value" x="594" y="457">207 s</text>
+
+    <text class="label" x="28" y="495">SevenNet-omni-mpa</text>
+    <rect x="305" y="477" width="292.7" height="24" rx="3" fill="#b9c4cb"/>
+    <text class="value" x="607" y="495">217 s</text>
+
+    <text class="label" x="28" y="533">eSEN-30M-OAM</text>
+    <rect x="305" y="515" width="458.4" height="24" rx="3" fill="#9aa8b2"/>
+    <text class="value" x="773" y="533">340 s</text>
+
+    <text class="label" x="28" y="571">UMA-M-omat</text>
+    <rect x="305" y="553" width="666.8" height="24" rx="3" fill="#de9187"/>
+    <text class="value" x="982" y="571">494 s</text>
+
+    <text class="label" x="28" y="609">UMA-M-oc20</text>
+    <rect x="305" y="591" width="698.0" height="24" rx="3" fill="#d65c52"/>
+    <text class="value" x="1013" y="609" fill="#b33e36">517 s</text>
+  </g>
+
+  <line x1="305" y1="648" x2="1047" y2="648" stroke="#9aa5af" stroke-width="1.5"/>
+  <g class="tick">
+    <text x="300" y="674">0</text>
+    <text x="426" y="674">100</text>
+    <text x="561" y="674">200</text>
+    <text x="696" y="674">300</text>
+    <text x="831" y="674">400</text>
+    <text x="966" y="674">500</text>
+    <text x="1008" y="704" font-size="17">wall time (s)</text>
+  </g>
+  <text class="note" x="28" y="730">Controlled subset: TiO2–CO*, TiO2–H*, IrO2–CO* · fmax 0.02 eV Å−1 · n = 14 models</text>
+</svg>
+

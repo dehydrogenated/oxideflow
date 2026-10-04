@@ -24,7 +24,7 @@
 # rejects --gres=gpu otherwise). Submit from /scratch:
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/molecular/sockeye_h2o_dissociation_probe.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/molecular/sockeye_h2o_dissociation_probe.slurm
 #
 # Extra sbatch args after the script path forward straight through, e.g. to narrow to one
 # material or add models back in (each extra model needs a CUDA-built torch in its own
@@ -34,7 +34,7 @@
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 echo "conda base $OXW_CONDA_BASE"
 echo "models     $OXW_MODEL_DIR"
 python -c "import oxide_workflow, sys; print('python', sys.version.split()[0])"

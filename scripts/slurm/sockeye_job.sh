@@ -23,7 +23,7 @@
 # so the script itself stays in the repo and is named by absolute path:
 #
 #     cd /scratch/st-akkiraju-1/$USER
-#     sbatch /arc/project/st-akkiraju-1/$USER/fullworkflow/scripts/slurm/sockeye_job.sh
+#     sbatch /arc/project/st-akkiraju-1/$USER/oxideflow/scripts/slurm/sockeye_job.sh
 #     sbatch /arc/.../sockeye_job.sh --material mp-825 --protocol seeded
 #
 # Anything after the script name is forwarded to the pipeline verbatim. The package is
@@ -54,7 +54,7 @@
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 echo "conda base $OXW_CONDA_BASE"
 echo "models     $OXW_MODEL_DIR"
 echo "device     $OXW_DEVICE"

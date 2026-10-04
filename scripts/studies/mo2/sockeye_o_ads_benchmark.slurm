@@ -15,14 +15,14 @@
 # See scripts/studies/mo2/o_adsorption_benchmark.py for the rationale. Submit from /scratch:
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_o_ads_benchmark.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_o_ads_benchmark.slurm
 #
 #   sbatch --account=st-akkiraju-1-gpu --partition=gpu --gres=gpu:1 --time=3:00:00 \
-#          /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_o_ads_benchmark.slurm
+#          /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_o_ads_benchmark.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 test -f "$OXW_MODEL_DIR/mace-mh-1.model" || {
     echo "missing checkpoint: $OXW_MODEL_DIR/mace-mh-1.model" >&2

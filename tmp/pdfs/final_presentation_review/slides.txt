@@ -1,0 +1,116 @@
+
+===== SLIDE 1 =====
+OxideFlow Automating surface energetics for oxide catalysis with machine learning (MLIPs)
+UBC SMAL • NSERC S2026 • May – August, 2026
+Sean Song 
+
+===== SLIDE 2 =====
+Project Context
+Our System: Initially starting with ABO3 perovskites for propane ODH, we decided to pivot to rutile oxides with simpler adsorbates to develop, validate, and test our pipeline against literature DFT. Rutile oxides were more abundant in literature and easier to build structurally. •Target properties: oxygen vacancy formation energy (OVFE) and adsorption energies of O* , H* , OH* , CO* , H2O*Project Goal: The primary goal was to build an MLIP-only pipeline to turn a bulk crystal to a user configured slab with defects and adsorbates. An extension to this goal was to figure out which machine learning models and configuration for MLIPs would suit our system best and provide the most accurate energetic predictions.
+ProblemDensity Functional Theory (DFT) is accurate but slow at calculating energies, forces, and stresses for atomic systems.
+SolutionTrain a neural network on DFT data to predict the same properties
+ResultMachine Learning Interatomic Potentials (MLIPs) predict the same properties 1000-10,000x faster but less accurately.
+
+===== SLIDE 3 =====
+The PipelineOxideFlow turns a bulk oxide structure into relaxed surfaces with vacancies or adsorbates and reports the energies, using MLIPs end to end rather than DFT.It automatically searches candidate vacancy and adsorption sites and returns the lowest-energy configuration for each. That lets researchers generate screening descriptors across a whole composition series, at a fraction of the DFT cost.Using it: point it at a Materials Project ID or a CIF , set the facet, supercell, and adsorbate in the config, and it returns the lowest-energy vacancy and adsorption site with their energies.Full architecture, methodology, site enumeration, and configuration options: github.com/dehydrogenated/oxideflow
+
+
+===== SLIDE 4 =====
+Benchmarking SuiteWe set out to determine whether MLIPs are accurate by benchmarking them against literature DFT. Our focus was whether the models capture trends rather than absolute energies, and we followed the workflow on the right to determine:    A. The best-performing models    B. The chemistries MLIPs struggle on    C. Which OxideFlow settings best reproduce DFTWe selected 14 checkpoints across six families based off public benchmarks and ease of access. We tested on rutile MO₂ against six independent literature DFT studies, 2009–2025 covering O* , OH* , CO* , H* , H₂O* and oxygen vacancy formation. All models selected and references can be found in Appendix B.
+
+
+===== SLIDE 5 =====
+Accompanying StudiesThese studies ran on ARC Sockeye's GPUs and were plotted / annotated with Claude. Each page below carries the full data behind the figures in this deck.O/OH Rutile Study — https://claude.ai/code/artifact/4ad90376-c303-49c6-9f77-87f118d74a8e Gas Reference Energies — https://claude.ai/code/artifact/4542ba2f-645b-4ac6-9062-cf133b84fef9 H2O-Adsorption Comparison — https://claude.ai/code/artifact/fb61bc89-410d-4370-a73e-6a526a4ba165 OVFE Benchmark — https://claude.ai/code/artifact/e11b78d6-a414-4496-b860-3c6d6e26190f CO / H Adsorption Comparison — https://claude.ai/code/artifact/66794b94-ec91-4a27-a3bb-7ea10a2897cbTuning Configurations — https://claude.ai/code/artifact/5b7d6bea-6daa-4f33-92d1-96a1fd2bf3b7 Propane/Propene Benchmark — https://claude.ai/code/artifact/4f7ff3ea-37da-41c3-ad36-e85cd5966445 
+
+===== SLIDE 6 =====
+Results: Trend vs Accuracy When ranking models, switching from Spearman correlation to mean absolute error changes the ordering drastically. On O* , MACE-mh1-matpes is 2nd by trend and 10th by error: it follows the chemistry across the series while sitting offset. eSEN-30M-OAM is the opposite, 6th by error and 13th by trend, accurate on average but reproducing the wrong ordering.How much the two metrics disagree depends on the adsorbate. On OH* every model falls between 0.71 and 0.88 correlation, with a mean error of 0.51 eV . On O* the same models spread from 0.55 to 0.88, with a mean error of 0.87 eV . Same models, same surfaces, same facets. 
+
+
+===== SLIDE 7 =====
+Results: No Universal WinnerWhen ranking models across how accurate and well they capture trends, nine different models take first place. The pattern holds surface by surface. On O* , nine different models are best on at least one of the 26 oxides, and the most successful wins only five. On OH* it is eleven of fifteen models. No model is consistently the best everywhere.Averaging placement across all ten metrics gives eSEN-30M-OAM in front, then a tie between CHGNet-0.3.0, MACE-mh1-omat and UMA-omat. However, every model in that group ranks in the bottom quartile on at least one metric. An average winner exists; a safe default does not.
+
+
+===== SLIDE 8 =====
+Results: Bigger isn’t BetterCHGNet-0.3.0 is the smallest model we tested and places second of fifteen on rank averaged across our benchmarks. It is also the only model here that predicts on-site magnetic moments, trained against MPtrj's magnetic moment labels, and it gives the lowest O* error on both the 3d rows. UMA-omat and UMA-M-omat run the same task on the same backbone. The smaller is version 1.2, trained with OC22 in the mixture; the larger is 1.1, trained without it. OC22 is the one dataset in the stack built from oxide surfaces with adsorbates. The gap concentrates where the data differs. It is largest on O* and OH* , the two oxide-surface adsorption benchmarks and the two with the most comparisons behind them, and falls within noise on the other four.In both cases size failed to predict which checkpoint performed better. Architecture and training coverage did.
+
+
+===== SLIDE 9 =====
+Results: Effects of MagnetismComer et al. (J. Phys. Chem. C, 2022) computed O* and OH* adsorption across the full 3d, 4d and 5d MO₂ series at PBE+U. Their set substitutes each metal into a fixed rutile prototype, and rutile is a common polymorph for only 19 of the 33, so several of these surfaces are not stable compounds. That affected our MLIPs more than it affected the DFT. Seven compositions failed to converge consistently, meaning the relaxations never settled: forces stayed above threshold and the geometry was still moving when the step budget ran out.Across the rest the split is clear. The 3d row is harder than 4d and 5d for nearly every model, and the tasks targeting OC20's RPBE fidelity are worst: 56% worse on 3d than on 4d and 5d, against 14% for every other task. On OH* , where the adsorbate shifts the metal oxidation state by half as much, the penalty disappears.We cannot pin that on the functional alone. Comer's Hubbard U values do not match the foundation training set conventions. The practical version is simpler: when the reference is PBE+U, select a PBE+U task.
+
+
+===== SLIDE 10 =====
+Results: Model SpeedThe surface sets the step count, and the step count sets the time. On any one model, a relaxation can take anywhere from 0.2× to 3.5× that model's typical wall time. OH* takes about twice as long as O* , a (100) facet adds about 20%, and group-5 oxides (V , Nb, Ta) run long even when they converge. The slowest surfaces are slow for every model, while the cost of each step stays fixed.Paying more does not buy accuracy. Ranking by cost against ranking by OH* error gives a correlation of −0.14. The most accurate model on OH* is mid-range at 48 s, and the two most expensive rank 9th and 13th.Adsorbates cost more because they take more steps. A vacancy relaxation averages 72 steps. Single atoms need about the same (O* 80, H* 78), while molecules need more: CO* 1.8×, OH* 2.7×. The extra steps go to finding the molecule's height and orientation along shallow directions of the energy surface.
+
+
+===== SLIDE 11 =====
+Results: Gas ReferencesMLIPs are trained mostly on periodic bulk and surface structures, with few isolated molecules and even fewer open-shell atoms, so their gas-phase energies deserve less trust (Loveday et al., 2026). This matters here because adsorption and oxygen vacancy formation energies all include a gas-phase reference term. We tested two conventions: each model's own gas references, and one shared reference. Neither wins across the board, some species are slightly improved while others are not. Reliability also depends on the species. Isolated O and H atoms are the worst by far, deviating on average 64% and 62% from the median across models, while H₂, H₂O, CO and OH all stay within 3.3%.For that reason we follow the literature convention and built O and OH references from stable molecules rather than atoms: O = E(H₂O) − E(H₂) + 2.51 eV , and OH = E(H₂O) − ½E(H₂).
+
+
+===== SLIDE 12 =====
+Results: Ideal SettingThe reference for this study used a 4×2 cell, four trilayers with the bottom two fixed. We found that the ideal settings differ by model, and no single model's optimum matches the DFT benchmark exactly. Averaged across the three the benchmark settings land at or near the top: 4 trilayers is the best slab thickness tested, 4×2 is second, and vacuum is indifferent. The benchmark settings a reasonable default.Frozen fraction is the one we cannot read from this sweep. It ran at 8 trilayers while the pipeline default is 4, so half frozen means a different structure in each and the two are not comparable. The matched test sweeps 0, 1, 2 and 3 frozen of 4 trilayers, and that is what we would run next.Model choice also limits cell size. eSEN-30M-OAM ran out of GPU memory between 384 and 600 atoms and dropped out of three of the four sweeps, so the memory ceiling is worth checking before committing to a supercell.
+
+
+===== SLIDE 13 =====
+Results: Propane and PropeneMLIPs struggled with the larger adsorbates, with only 5 of 18 relaxations reaching the force criterion. The overall MAE was 0.66 eV , but because most runs never converged, those energies were still dropping when the budget ran out, so trend analysis should wait.The main takeaway is that for larger molecules, adsorbate sampling is much more complex and computationally expensive.For a flexible molecule the starting position and orientation matter as much as the model, and we used one fixed orientation per site while the benchmarked dataset (Game-net-ox) samples several sites with up to three rotations each. Sampling orientations is the first fix. A smaller force criterion and a larger step budget only help the handful that were still descending toward the surface.
+
+
+===== SLIDE 14 =====
+Key TakeawaysMLIPs come with a lot of knobs, and OxideFlow is a way to turn them one at a time and see what moves. Across these studies the answer shifted from both sides.On the model side the training dataset matters most, then the architecture, then the settings the model is run at: slab configuration, gas references, and which DFT fidelity you select.On the task side the surface chemistry dominates, and the facet changes how long a calculation takes. Chemistries where rutile is not a stable polymorph, mostly the d¹⁰ and p-block metals, often never converge at all, while the magnetic 3d row converges reliably and carries the largest errors instead. The adsorbate matters as much. Small ones relax quickly but lean on gas references that are unreliable for radicals and isolated atoms, and larger ones bring many possible orientations, so finding the minimum means sampling across them.None of this is visible from a single benchmark number. Seeing it took running the same surfaces through fifteen models under settings we could vary deliberately, which is what the pipeline is for.
+
+===== SLIDE 15 =====
+Limitations•Scope. OxideFlow is built around the rutile prototype and every benchmark here is a rutile surface. The thin reference data follows from the same constraint, since rutile MO₂ with adsorbates is a small literature: most benchmarks rest on one or two independent values, the two large ones come from a single study, and none of it was reproduced in house.•Validity of the reference set. The O* / OH* study substitutes every metal into a fixed rutile prototype, and rutile is a common polymorph for only 19 of the 33, so part of what we measured is model behaviour on compounds that do not exist.•Coverage. Seven chemistries were dropped for low convergence, and the propane and propene runs used one orientation per site and mostly never converged, so those two results describe the workflow more than they measure the models. Everything reported is a 0 K static relaxation, with no barriers, coverage or temperature effects.
+
+===== SLIDE 16 =====
+Next StepsSome key features I will be continuing to work on:•A slab builder that handles bulk crystals beyond the rutile prototype, so the same benchmarks can run on perovskites.•Dissociation energies, the step propane ODH actually turns on.•Orientation sampling for flexible adsorbates such as propane or propene.•In-house DFT gas references, so the weakest part of the pipeline is checked against something we control and can be used as a static reference instead.
+Thank you for reading/listening!
+
+===== SLIDE 17 =====
+Appendix A: DFT References
+
+===== SLIDE 18 =====
+DFT ReferencesO/OH Rutile StudyComer, B. M.; Li, J.; Abild-Pedersen, F.; Bajdich, M.; Winther, K. T. J. Phys. Chem. C 2022, 126, 7903–7909. https://doi.org/10.1021/acs.jpcc.2c02381CO/H Adsorption ComparisonAndriuc, O.; Siron, M.; Persson, K. A. Surface Science 2025, 758, 122745. https://doi.org/10.1016/j.susc.2025.122745Pope, C.; Yun, J.; Reddy, R.; Jamir, J.; Kim, M.; Asthagiri, A.; Weaver, J. F . Surface Science 2025, 751, 122619. https://doi.org/10.1016/j.susc.2024.122619H₂O Adsorption ComparisonGonzález, D.; Heras-Domingo, J.; Pantaleone, S.; Rimola, A.; Rodríguez-Santiago, L.; Solans-Monfort, X.; Sodupe, M. ACS Omega 2019, 4, 2989–2999. https://doi.org/10.1021/acsomega.8b03350OVFE BenchmarkKowalski, P . M.; Meyer, B.; Marx, D. Phys. Rev. B 2009, 79, 115410. https://doi.org/10.1103/PhysRevB.79.115410Propane/Propene BenchmarkVan Hout, T.; Loveday, O.; Morales-Vidal, J.; Morandi, S.; López, N. Digital Discovery 2026, 5, 407–414. https://doi.org/10.1039/D5DD00331HGAME-Net-Ox dataset, ioChem-BD. https://doi.org/10.19061/iochem-bd-1-396
+
+===== SLIDE 19 =====
+Other Important PapersKempen, Luuk H. E., Raffaele Cheula, and Mie Andersen. “How Accurate Are Foundational Machine Learning Interatomic Potentials for Heterogeneous Catalysis?” Version 1. Preprint, arXiv, 2025. https://doi.org/10.48550/ARXIV .2512.16702.Loveday, Oliver, Kamila Kaźmierczak, and Núria López. “Challenges and Opportunities of Pretrained Machine Learning Interatomic Potentials in Heterogeneous Catalysis. ” ACS Catalysis 16, no. 5 (2026): 4113–24. https://doi.org/10.1021/acscatal.5c08945.Barros-Luque, Luis, Muhammed Shuaibi, Xiang Fu, et al. “The Open Materials 2024 (OMat24) Inorganic Materials Dataset and Models. ” Nature Computational Science, ahead of print, June 2, 2026. https://doi.org/10.1038/s43588-026-00996-w.Tran, Richard, Janice Lan, Muhammed Shuaibi, et al. “The Open Catalyst 2022 (OC22) Dataset and Challenges for Oxide Electrocatalysts. ” ACS Catalysis 13, no. 5 (2023): 3066–84. https://doi.org/10.1021/acscatal.2c05426.
+
+===== SLIDE 20 =====
+Appendix B: Models and Dataset Information
+
+===== SLIDE 21 =====
+Models
+Foundation Model OverviewCheckpointReleasedParametersTraining SetUMA-S-1.2Jun 20256MFive domains at once — OC20 & OC22 (catalysis), OMat24 (bulk crystals), OMol25 (molecules), OMC25 (molecular crystals), ODAC (MOFs). Task head selects which domain’s DFT settings.UMA-M-1.1Jun 202550MSame above besides OC22eSEN-30M-OAMFeb 202530MSingle head; OMat24 → fine-tuned on sAlex + MPtrj
+SevenNet-omniOct 202554.9MCOSMOS — 15 open databases, ~242M structures spanning molecular, inorganic and interfacial chemistry, learned at 13 DFT levels simultaneouslyOrb-v2Oct 202425MMPtrj + Alexandria CHGNet-0.3.0Mar 20230.41MMPtrj with 7.9M on-site MMOMsMACE-MH-1Oct 2025not publishedOMat24 foundation (100M configs), then multi-head replay fine-tuning omat_pbe, matpes_r2scan, omol, spice, rgd1, oc20
+* These 7 models were chosen based on of results from https://catbench.org/?dataset=Game-Net-Ox  
+
+===== SLIDE 22 =====
+Datasets
+Foundational Dataset Overview
+02
+DatasetSize & TypeDFT MethodLabelsAtoms per StructureSystem typeMPTraj1.6M FramesPBE / PBE+UE, F , S, μ2–200, median 10–20Bulk crystalssAlex10M structures (rattled + short-relaxedPBE / PBE+UE, F , SPredominantly ≤16Bulk crystalsOMat24118M structures (eq, rattled, strained, AIMD at 300/1000KPBE / PBE+UE, F , S1–100, majority <20Bulk crystalsMatPES400k AIMD structures at 300KPBE / r2SCANE, F , S~2–50 (bulk cells)Bulk crystals
+OC201.3M trajectories, AIMD trajectories (High T), rattled and adsorbate structuresRPBEE, F , S*~50–200Metallic surfaces
+OC2262k Trajectories + adsorbate structuresPBE+UE, F~60–150Oxide surfaces
+
+===== SLIDE 23 =====
+Datasets
+Types of Data in DFT Datasets
+02
+TypeWhat you doWhat you saveDatasetsFull trajectoryRun a VASP relaxation, let it converge. Every ionic step from start to finish (bulk~40, surfaces~100)OC20, OC22, MPtrj, OMAT24 Final relaxed onlyRun a VASP relaxation, let it convergeOnly the last frame (the minimum)AlexandriaStatic single-points Use something other than VASP to make structures, then ask VASP for the energy/forces at each oneOne single-point energy/force per structure (1 frame)MatPES , OMAT24Short perturbed samplingStart from an already-relaxed structure, deliberately displace it, run a short VASP relaxationEvery ionic step of the short trajectory(5 – 20 frames)sAlex, OMAT24
+
+===== SLIDE 24 =====
+Datasets
+Perturbed Sampling Techniques
+02
+TechniqueOff-equilibrium howDatasetsUse caseRattleRandom Gaussian atomic displacementsAlex, OMat24Broad force-direction coverage near minimaStrainCell deformation (atoms ride along)OMat24Stress / elastic constants / cell relaxationAIMD snapshots (subsampled)True or MLIP-driven MD at finite TOMat24 (true AIMD), MatPES (M3GNet-MD)Thermally realistic distortionsBoltzmann MCStatistically-weighted ensembleOMat24Controllable thermal samplingNEBTransition-state path generationNone of the major datasetsTS energetics, reaction barriers
+
+===== SLIDE 25 =====
+Datasets
+INCAR / POTCAR Settings
+02
+DatasetData typeSpin pol.PAW versionMPtrjPBE + PBE+U mixISPIN=2 on magnetic elements onlyPBE (legacy, ~5.2–5.4)OMat24PBE + PBE+U mixISPIN=2 on magnetic elements onlyPBE_54Alex / sAlexPBE + PBE+U mixISPIN=2 on magnetic elements onlyPBE (legacy)MatPES-PBEPBEISPIN=2 globallyPBE_64MatPES-r2SCANr2SCAN (meta-GGA)ISPIN=2 globallyPBE_64OC20RPBEISPIN=1 globallyPBE (5.x era)OC22PBE + PBE+U mixISPIN=2 globallyPBE (5.x era)
+
+===== SLIDE 26 =====
+Datasets
+Other VASP Settings
+02
+DatasetSmearing (ISMEAR / σ)k-point densityENCUTEDIFFEDIFFGMPtrjtet (–5) non-metals; Gauss (0), σ=0.05 metalsKPPRA 64 (relax steps), 100 (final static)520 eV5×10⁻⁵ × N_atomsdefaults to 10×EDIFF OMat24MPtrjMPtrjMPtrjMPtrjMPtrjsAlexMPtrjMPtrjMPtrjMPtrjMPtrjMatPES-PBEGauss (0), σ=0.05KSPACING ≈ 0.22 Å⁻¹520 eV1×10⁻⁵N/A - static setMatPES-r2SCANGauss (0), σ=0.05KSPACING ≈ 0.22 Å⁻¹680 eV , ENAUG 13601×10⁻⁵N/A - static set
+OC20MP (1), σ=0.2k-multiplier 40 (≈ 4×4×1 typical slab)350 eV1×10⁻⁴–0.03 eV/Å (force)OC22Gauss (0), σ=0.05KPPRA ≈ 30 (MP-surface variant)≈ 520 eV1×10⁻⁴–0.05 eV/Å (force)

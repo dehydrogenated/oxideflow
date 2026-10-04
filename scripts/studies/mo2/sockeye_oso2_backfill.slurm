@@ -41,11 +41,11 @@
 #   1. Repo up to date: git pull origin main (needs the Os fix commit)
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_oso2_backfill.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_oso2_backfill.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 MODELS=(
     CHGNet-0.3.0 Orb-v2

@@ -38,9 +38,9 @@
 #   2. "esen" env exists, esen_30m_oam.pt staged at $PROJECT/models/ (checked below)
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_esen_backfill.slurm 3d
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_esen_backfill.slurm 4d
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_esen_backfill.slurm 5d
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_esen_backfill.slurm 3d
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_esen_backfill.slurm 4d
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_esen_backfill.slurm 5d
 
 set -euo pipefail
 
@@ -54,7 +54,7 @@ case "$ROW" in
     *) echo "unknown row: $ROW -- expected 3d, 4d, or 5d" >&2; exit 1 ;;
 esac
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 echo "row $ROW"
 
 test -d "$OXW_CONDA_BASE/envs/esen" || {

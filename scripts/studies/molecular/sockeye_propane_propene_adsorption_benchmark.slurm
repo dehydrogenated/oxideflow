@@ -42,7 +42,7 @@
 # from /scratch:
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/molecular/sockeye_propane_propene_adsorption_benchmark.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/molecular/sockeye_propane_propene_adsorption_benchmark.slurm
 #
 # Extra sbatch args after the script path forward straight through -- e.g. to calibrate
 # timing on a small slice first:
@@ -51,7 +51,7 @@
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 python -c "import oxide_workflow, sys; print('python', sys.version.split()[0])"
 
 # Only the checkpoints this specific benchmark's three models need -- Orb-v2, eSEN-30M-OAM,

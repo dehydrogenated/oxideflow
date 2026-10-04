@@ -1,0 +1,8 @@
+O_Ads_1 — Zhao & Kulik, J. Phys. Chem. Lett. (2019), DOI 10.1021/acs.jpclett.9b01650
+O_OH_Trendline — Comer et al., J. Phys. Chem. C (2022), DOI 10.1021/acs.jpcc.2c02381
+CO_H_Ads — Andriuc et al., Surface Science (2025), DOI 10.1016/j.susc.2025.122745; Pope et al., Surface Science (2025), DOI 10.1016/j.susc.2024.122619
+H2O_ads — González et al., ACS Omega (2019), DOI 10.1021/acsomega.8b03350
+OVFE_Benchmark — Kowalski, Meyer & Marx, Phys. Rev. B (2009), DOI 10.1103/PhysRevB.79.115410
+Gas_Refs — OxideFlow internal gas-reference audit (2026); oxygen convention: Kowalski, Meyer & Marx (2009)
+Config_Tuning — OxideFlow internal configuration-sensitivity study (2026)
+propane_ads — Van Hout et al., Digital Discovery (2026), DOI 10.1039/D5DD00331H; ioChem-BD dataset DOI 10.19061/iochem-bd-1-396

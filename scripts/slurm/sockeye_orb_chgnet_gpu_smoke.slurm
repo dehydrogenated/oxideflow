@@ -29,11 +29,11 @@
 #      this smoke test is what tells you whether that worked, it doesn't do the reinstall
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/sockeye_orb_chgnet_gpu_smoke.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/sockeye_orb_chgnet_gpu_smoke.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 for model in Orb-v2 CHGNet-0.3.0; do
     echo "=== $model ==="

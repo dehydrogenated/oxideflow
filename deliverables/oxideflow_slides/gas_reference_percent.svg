@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690">
+  <defs>
+    <pattern id="pilotPct" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#d9e0e4"/>
+      <rect width="3" height="10" fill="#99a8b2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="690" fill="#ffffff"/>
+  <style>
+    text { font-family: Aptos, Arial, sans-serif; fill: #151a20; }
+    .title { font-size: 31px; font-weight: 700; }
+    .sub { font-size: 17px; fill: #66717d; }
+    .section { font-size: 20px; font-weight: 700; }
+    .label { font-size: 18px; font-weight: 700; }
+    .value { font-size: 17px; font-weight: 700; }
+    .small { font-size: 14px; fill: #66717d; }
+  </style>
+
+  <text class="title" x="28" y="39">Normalized disagreement across gas references</text>
+  <text class="sub" x="28" y="67">Mean absolute percentage deviation from the cross-model median</text>
+
+  <text class="section" x="34" y="112">Atomic references</text>
+  <text class="small" x="34" y="135">15 models</text>
+  <g stroke="#e6eaed" stroke-width="1">
+    <line x1="150" y1="151" x2="150" y2="244"/>
+    <line x1="280" y1="151" x2="280" y2="244"/>
+    <line x1="410" y1="151" x2="410" y2="244"/>
+    <line x1="540" y1="151" x2="540" y2="244"/>
+  </g>
+  <text class="label" x="55" y="180">O</text>
+  <rect x="150" y="159" width="415" height="28" rx="3" fill="#009b93"/>
+  <text class="value" x="577" y="180" fill="#007f78">63.84%</text>
+  <text class="label" x="55" y="228">H</text>
+  <rect x="150" y="207" width="406" height="28" rx="3" fill="#2facaa"/>
+  <text class="value" x="568" y="228" fill="#007f78">62.41%</text>
+  <text class="small" x="150" y="264">0</text><text class="small" x="272" y="264">20%</text>
+  <text class="small" x="402" y="264">40%</text><text class="small" x="532" y="264">60%</text>
+
+  <text class="section" x="34" y="315">Molecular and radical references</text>
+  <text class="small" x="34" y="338">15 models, except O₂ pilot</text>
+  <g>
+    <text class="label" x="55" y="379">O₂†</text>
+    <rect x="150" y="358" width="435" height="27" rx="3" fill="url(#pilotPct)"/>
+    <text class="value" x="597" y="379">7.91%</text>
+
+    <text class="label" x="55" y="423">OH</text>
+    <rect x="150" y="402" width="178" height="27" rx="3" fill="#65bdb6"/>
+    <text class="value" x="340" y="423">3.24%</text>
+
+    <text class="label" x="55" y="467">H₂</text>
+    <rect x="150" y="446" width="112" height="27" rx="3" fill="#8acac4"/>
+    <text class="value" x="274" y="467">2.03%</text>
+
+    <text class="label" x="55" y="511">H₂O</text>
+    <rect x="150" y="490" width="107" height="27" rx="3" fill="#9fd3ce"/>
+    <text class="value" x="269" y="511">1.94%</text>
+
+    <text class="label" x="55" y="555">CO</text>
+    <rect x="150" y="534" width="97" height="27" rx="3" fill="#b5ded9"/>
+    <text class="value" x="259" y="555">1.77%</text>
+  </g>
+  <text class="small" x="55" y="591">† O₂ includes 5 models only. Do not use it for a 15-model rank.</text>
+
+  <line x1="690" y1="92" x2="690" y2="607" stroke="#dfe5e9" stroke-width="2"/>
+  <text class="section" x="730" y="112">Largest molecular-reference deviations</text>
+  <text class="small" x="730" y="135">Average across H₂, H₂O, CO, and OH</text>
+
+  <text class="label" x="730" y="181">MACE-mh1-matpes</text>
+  <rect x="730" y="195" width="299" height="24" rx="3" fill="#d8665d"/>
+  <text class="value" x="1041" y="214" fill="#b5463d">8.53%</text>
+
+  <text class="label" x="730" y="257">UMA-oc22</text>
+  <rect x="730" y="271" width="228" height="24" rx="3" fill="#df9289"/>
+  <text class="value" x="970" y="290">6.52%</text>
+
+  <text class="label" x="730" y="333">UMA-oc20</text>
+  <rect x="730" y="347" width="122" height="24" rx="3" fill="#b8c4cb"/>
+  <text class="value" x="864" y="366">3.49%</text>
+
+  <text class="label" x="730" y="409">CHGNet-0.3.0</text>
+  <rect x="730" y="423" width="106" height="24" rx="3" fill="#b8c4cb"/>
+  <text class="value" x="848" y="442">3.02%</text>
+
+  <rect x="730" y="489" width="420" height="112" rx="8" fill="#fff0ed"/>
+  <text x="754" y="521" font-size="18" font-weight="700" fill="#a33f37">Atomic outlier</text>
+  <text x="754" y="554" font-size="18">eSEN: O 451.91%, H 332.67%</text>
+  <text x="754" y="582" font-size="15" fill="#755653">Its four molecular references remain within 0.2% of the median.</text>
+
+  <rect x="28" y="628" width="1144" height="43" rx="7" fill="#e5f7f5"/>
+  <text x="600" y="656" text-anchor="middle" font-size="19" font-weight="800" fill="#007f78">Open-shell atoms are unstable. Reaction-based references avoid the failure.</text>
+</svg>

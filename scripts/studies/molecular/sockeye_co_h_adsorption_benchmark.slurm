@@ -26,7 +26,7 @@
 # this repo -- Sockeye rejects --gres=gpu otherwise). Submit from /scratch:
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/molecular/sockeye_co_h_adsorption_benchmark.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/molecular/sockeye_co_h_adsorption_benchmark.slurm
 #
 # Extra sbatch args after the script path forward straight through:
 #   sbatch sockeye_co_h_adsorption_benchmark.slurm --oxides IrO2 --adsorbates CO
@@ -34,7 +34,7 @@
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 python -c "import oxide_workflow, sys; print('python', sys.version.split()[0])"
 
 for ckpt in mace-mh-1.model uma-s-1p2.pt uma-m-1p1.pt sevennet-omni.pth esen_30m_oam.pt orb-v2-20241011.ckpt; do

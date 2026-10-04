@@ -28,11 +28,11 @@
 #      requirements, nothing extra needed here
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/sockeye_gas_reference_report.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/sockeye_gas_reference_report.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 OUT="$SLURM_SUBMIT_DIR/runs/gas_reference_report.csv"
 python "$REPO/scripts/studies/gas_reference_report.py" --out "$OUT" "$@"

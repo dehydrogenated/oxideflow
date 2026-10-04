@@ -1,7 +1,7 @@
 # Shared Sockeye environment contract -- sourced by every job script in this repo.
 #
 #   set -euo pipefail
-#   source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+#   source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 #
 # Sourced with an absolute path on purpose: SLURM copies the batch script into a spool
 # directory before running it, so ${BASH_SOURCE[0]} points at /var/spool/... and cannot be
@@ -24,7 +24,7 @@
 : "${SLURM_SUBMIT_DIR:?_env.sh must be sourced from inside a SLURM job (SLURM_SUBMIT_DIR unset)}"
 
 PROJECT=/arc/project/st-akkiraju-1/ssong18
-REPO="$PROJECT/fullworkflow"
+REPO="$PROJECT/oxideflow"
 
 export OXW_CONDA_BASE="$PROJECT/miniforge3"
 export OXW_MODEL_DIR="$PROJECT/models"

@@ -18,15 +18,15 @@
 # command-line flags beat the #SBATCH defaults above, so no editing is needed.
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/sockeye_run_stage.slurm \
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/sockeye_run_stage.slurm \
 #          vacancy --model UMA-M-omat --outdir runs/ovfe_uma_m_omat
 #
 #   sbatch --account=st-akkiraju-1-gpu --partition=gpu --gres=gpu:1 --time=0:30:00 \
-#          /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/sockeye_run_stage.slurm \
+#          /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/sockeye_run_stage.slurm \
 #          vacancy --model UMA-M-oc20 --outdir runs/ovfe_uma_m_oc20
 
 set -euo pipefail
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 test -f "$OXW_MODEL_DIR/mace-mh-1.model" || {
     echo "missing checkpoint: $OXW_MODEL_DIR/mace-mh-1.model" >&2

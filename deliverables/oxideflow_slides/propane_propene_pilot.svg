@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <style>
+    text { font-family: Aptos, Arial, sans-serif; fill: #151a20; }
+    .title { font-size: 31px; font-weight: 700; }
+    .sub { font-size: 17px; fill: #66717d; }
+    .model { font-size: 20px; font-weight: 700; }
+    .value { font-size: 24px; font-weight: 800; }
+    .small { font-size: 15px; fill: #66717d; }
+  </style>
+
+  <text class="title" x="30" y="40">Accuracy and convergence disagree</text>
+  <text class="sub" x="30" y="68">Propane/propene pilot · six relaxations per model</text>
+  <rect x="944" y="20" width="226" height="62" rx="8" fill="#fff0ed"/>
+  <text x="966" y="50" font-size="26" font-weight="800" fill="#b5463d">5 / 18</text>
+  <text x="966" y="70" font-size="14" fill="#8c5c57">force-converged overall</text>
+
+  <line x1="100" y1="410" x2="1110" y2="410" stroke="#9aa5af" stroke-width="1.5"/>
+  <g stroke="#e6eaed" stroke-width="1">
+    <line x1="100" y1="330" x2="1110" y2="330"/>
+    <line x1="100" y1="250" x2="1110" y2="250"/>
+    <line x1="100" y1="170" x2="1110" y2="170"/>
+  </g>
+  <g font-size="14" fill="#7b8792">
+    <text x="52" y="415">0.0</text><text x="52" y="335">0.3</text><text x="52" y="255">0.6</text><text x="52" y="175">0.9</text>
+    <text x="30" y="128" transform="rotate(-90 30 128)">MAE (eV)</text>
+  </g>
+
+  <g>
+    <rect x="200" y="291" width="170" height="119" rx="4" fill="#65bdb6"/>
+    <text class="value" x="246" y="278" fill="#007f78">0.446</text>
+    <text class="model" x="213" y="446">UMA-M-oc20</text>
+    <text class="small" x="225" y="470">trend capture 0 / 2</text>
+
+    <rect x="515" y="237" width="170" height="173" rx="4" fill="#8bc9c4"/>
+    <text class="value" x="561" y="224">0.647</text>
+    <text class="model" x="522" y="446">eSEN-30M-OAM</text>
+    <text class="small" x="540" y="470">trend capture 2 / 2</text>
+
+    <rect x="830" y="175" width="170" height="235" rx="4" fill="#b8c4cb"/>
+    <text class="value" x="876" y="162">0.881</text>
+    <text class="model" x="882" y="446">Orb-v2</text>
+    <text class="small" x="855" y="470">trend capture 1 / 2</text>
+  </g>
+
+  <g>
+    <text class="small" x="110" y="512">force convergence</text>
+    <g fill="#ffffff" stroke="#d65c52" stroke-width="2">
+      <circle cx="230" cy="507" r="9"/><circle cx="254" cy="507" r="9"/><circle cx="278" cy="507" r="9"/>
+      <circle cx="302" cy="507" r="9"/><circle cx="326" cy="507" r="9"/><circle cx="350" cy="507" r="9"/>
+      <circle cx="545" cy="507" r="9"/><circle cx="569" cy="507" r="9"/><circle cx="593" cy="507" r="9"/>
+      <circle cx="617" cy="507" r="9"/><circle cx="641" cy="507" r="9"/><circle cx="665" cy="507" r="9"/>
+    </g>
+    <g stroke="#009b93" stroke-width="2">
+      <circle cx="860" cy="507" r="9" fill="#009b93"/><circle cx="884" cy="507" r="9" fill="#009b93"/>
+      <circle cx="908" cy="507" r="9" fill="#009b93"/><circle cx="932" cy="507" r="9" fill="#009b93"/>
+      <circle cx="956" cy="507" r="9" fill="#009b93"/><circle cx="980" cy="507" r="9" fill="#ffffff" stroke="#d65c52"/>
+    </g>
+    <text class="small" x="275" y="535">0 / 6</text>
+    <text class="small" x="590" y="535">0 / 6</text>
+    <text class="small" x="905" y="535">5 / 6</text>
+  </g>
+
+  <rect x="100" y="560" width="1010" height="42" rx="7" fill="#e5f7f5"/>
+  <text x="600" y="588" text-anchor="middle" font-size="20" font-weight="800" fill="#007f78">Nominal lowest MAE ≠ validated production winner</text>
+</svg>
+

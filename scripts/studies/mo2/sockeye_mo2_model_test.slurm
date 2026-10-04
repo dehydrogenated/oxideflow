@@ -34,7 +34,7 @@ set -euo pipefail
 MODEL="${1:?usage: sbatch sockeye_mo2_model_test.slurm <MODEL-NAME> [extra args]}"
 shift
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 OUT="$SLURM_SUBMIT_DIR/runs/model_test_$MODEL"
 python "$REPO/scripts/studies/mo2/mo2_adsorption_benchmark.py" "$OUT" \

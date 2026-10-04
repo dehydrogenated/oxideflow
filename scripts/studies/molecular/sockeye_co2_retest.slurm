@@ -21,17 +21,17 @@
 #     submission time — command-line flags beat the #SBATCH defaults above:
 #
 #     cd /scratch/st-akkiraju-1/$USER
-#     sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/molecular/sockeye_co2_retest.slurm
+#     sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/molecular/sockeye_co2_retest.slurm
 #
 #     sbatch --account=st-akkiraju-1-gpu --partition=gpu --gres=gpu:1 --time=6:00:00 \
-#            /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/molecular/sockeye_co2_retest.slurm
+#            /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/molecular/sockeye_co2_retest.slurm
 #
 # 180 relaxations (3 sites x 6 orientations x 5 oxides x 2 models), early-stop pruning the
 # doomed ones at step 100 instead of running to 300 — GPU strongly recommended over cascade.
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 echo "conda base $OXW_CONDA_BASE"
 echo "models     $OXW_MODEL_DIR"
 python -c "import oxide_workflow, sys; print('python', sys.version.split()[0])"

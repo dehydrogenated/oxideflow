@@ -12,7 +12,7 @@ set -euo pipefail
 
 REMOTE_HOST="ssong18@sockeye.arc.ubc.ca"  # NOT arc.sockeye.ubc.ca -- that hostname doesn't
 # resolve (confirmed via nslookup); the subdomain order in ~/.ssh/config's alias is swapped.
-REMOTE_RUNS="/arc/project/st-akkiraju-1/ssong18/fullworkflow/runs"
+REMOTE_RUNS="/arc/project/st-akkiraju-1/ssong18/oxideflow/runs"
 LOCAL_RUNS="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/runs"
 
 SUBPATH="${1:-}"

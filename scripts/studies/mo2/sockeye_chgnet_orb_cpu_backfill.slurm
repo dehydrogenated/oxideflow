@@ -28,9 +28,9 @@
 #      (checked below; CHGNet's weights ship inside the package)
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_chgnet_orb_cpu_backfill.slurm 3d
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_chgnet_orb_cpu_backfill.slurm 4d
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_chgnet_orb_cpu_backfill.slurm 5d
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_chgnet_orb_cpu_backfill.slurm 3d
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_chgnet_orb_cpu_backfill.slurm 4d
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_chgnet_orb_cpu_backfill.slurm 5d
 
 set -euo pipefail
 
@@ -47,7 +47,7 @@ esac
 # Pinned, not detected: this job never asks for a GPU (no -gpu account, no --gres),
 # and both models are measured fine on CPU -- see the header note above.
 OXW_DEVICE=cpu
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 echo "row $ROW"
 
 for env in chgnet orb; do

@@ -27,7 +27,7 @@
 # elsewhere in this repo -- Sockeye rejects --gres=gpu otherwise). Submit from /scratch:
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/molecular/sockeye_h2o_adsorption_benchmark.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/molecular/sockeye_h2o_adsorption_benchmark.slurm
 #
 # Extra sbatch args after the script path forward straight through:
 #   sbatch sockeye_h2o_adsorption_benchmark.slurm --oxides RuO2 IrO2
@@ -35,7 +35,7 @@
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 echo "conda base $OXW_CONDA_BASE"
 echo "models     $OXW_MODEL_DIR"
 python -c "import oxide_workflow, sys; print('python', sys.version.split()[0])"

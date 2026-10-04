@@ -41,11 +41,11 @@
 #      $PROJECT/models/ (checked below)
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/ovfe/sockeye_ovfe_tio2_backfill.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/ovfe/sockeye_ovfe_tio2_backfill.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 for env in mace-clean fairchem sevenn esen; do
     test -d "$OXW_CONDA_BASE/envs/$env" || {

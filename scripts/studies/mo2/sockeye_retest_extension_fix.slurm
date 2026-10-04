@@ -21,7 +21,7 @@
 #
 # GPU recommended -- 7 legs, should be quick either way, but no reason not to:
 #   sbatch --account=st-akkiraju-1-gpu --partition=gpu --gres=gpu:1 --time=1:00:00 \
-#          /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_retest_extension_fix.slurm
+#          /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_retest_extension_fix.slurm
 #
 # PREREQUISITES:
 #   1. Repo up to date: git pull origin main (needs the extension-logic fix commit)
@@ -29,11 +29,11 @@
 #      does not recreate it from scratch
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_retest_extension_fix.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_retest_extension_fix.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 OUT="$SLURM_SUBMIT_DIR/runs/mo2_medium_test"
 test -d "$OUT" || {

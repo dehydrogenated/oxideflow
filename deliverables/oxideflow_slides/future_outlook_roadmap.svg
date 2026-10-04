@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="500" viewBox="0 0 1400 500">
+  <rect width="1400" height="500" fill="#ffffff"/>
+  <style>
+    text { font-family: Aptos, Arial, sans-serif; fill: #151a20; }
+    .kicker { font-size: 15px; letter-spacing: 2px; font-weight: 700; fill: #007f78; }
+    .stage { font-size: 28px; font-weight: 800; }
+    .body { font-size: 19px; fill: #4d5963; }
+    .num { font-size: 27px; font-weight: 800; fill: #ffffff; }
+  </style>
+
+  <text class="kicker" x="55" y="40">SELECTION → VALIDATION LOOP</text>
+  <line x1="120" y1="138" x2="1280" y2="138" stroke="#b9deda" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 1270 121 L 1292 138 L 1270 155" fill="none" stroke="#009b93" stroke-width="7" stroke-linejoin="round"/>
+
+  <g>
+    <circle cx="235" cy="138" r="45" fill="#009b93"/>
+    <text class="num" x="235" y="148" text-anchor="middle" style="fill:#ffffff">1</text>
+    <text class="stage" x="115" y="222">Standardize</text>
+    <text class="body" x="115" y="260">One GPU + end-to-end timing</text>
+    <text class="body" x="115" y="292">Corrected slab construction</text>
+    <text class="body" x="115" y="324">Gas-reference provenance</text>
+
+    <circle cx="690" cy="138" r="45" fill="#009b93"/>
+    <text class="num" x="690" y="148" text-anchor="middle" style="fill:#ffffff">2</text>
+    <text class="stage" x="572" y="222">Tune</text>
+    <text class="body" x="572" y="260">fmax · freeze depth · vacuum</text>
+    <text class="body" x="572" y="292">supercell · standoff</text>
+    <text class="body" x="572" y="324">multi-site + multi-orientation</text>
+
+    <circle cx="1145" cy="138" r="45" fill="#009b93"/>
+    <text class="num" x="1145" y="148" text-anchor="middle" style="fill:#ffffff">3</text>
+    <text class="stage" x="1024" y="222">Validate</text>
+    <text class="body" x="1024" y="260">DFT single points / re-relaxation</text>
+    <text class="body" x="1024" y="292">dissociation + H abstraction</text>
+    <text class="body" x="1024" y="324">propane dehydrogenation paths</text>
+  </g>
+
+  <rect x="150" y="385" width="1100" height="72" rx="10" fill="#e5f7f5"/>
+  <text x="700" y="414" text-anchor="middle" font-size="16" font-weight="700" fill="#007f78">DECISION GATE</text>
+  <text x="700" y="443" text-anchor="middle" font-size="23" font-weight="800" fill="#235c58">accuracy + wall time + convergence + state retention + reference stability</text>
+</svg>

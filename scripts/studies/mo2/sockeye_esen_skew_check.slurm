@@ -24,18 +24,18 @@
 # For GPU (recommended -- eSEN is the slowest model in this project's own timing logs, and
 # this job still runs 33 oxides x 2 facets x 2 relaxations = 132 relaxations):
 #   sbatch --account=st-akkiraju-1-gpu --partition=gpu --gres=gpu:1 --time=2:00:00 \
-#          /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_esen_skew_check.slurm
+#          /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_esen_skew_check.slurm
 #
 # PREREQUISITES:
 #   1. Repo up to date: git pull origin main
 #   2. "esen" env exists, esen_30m_oam.pt staged at $PROJECT/models/ (checked below)
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/mo2/sockeye_esen_skew_check.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/mo2/sockeye_esen_skew_check.slurm
 
 set -euo pipefail
 
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 
 test -d "$OXW_CONDA_BASE/envs/esen" || {
     echo "missing conda env: $OXW_CONDA_BASE/envs/esen" >&2

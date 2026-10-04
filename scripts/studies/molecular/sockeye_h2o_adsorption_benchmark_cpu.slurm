@@ -26,7 +26,7 @@
 # way). Submit from /scratch, no GPU account needed:
 #
 #   cd /scratch/st-akkiraju-1/$USER
-#   sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/studies/molecular/sockeye_h2o_adsorption_benchmark_cpu.slurm
+#   sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/studies/molecular/sockeye_h2o_adsorption_benchmark_cpu.slurm
 #
 # Extra sbatch args after the script path forward straight through:
 #   sbatch sockeye_h2o_adsorption_benchmark_cpu.slurm --oxides RuO2 IrO2
@@ -36,7 +36,7 @@ set -euo pipefail
 # Pinned, not detected: this job never asks for a GPU (no -gpu account, no --gres),
 # and both models are measured fine on CPU -- see the header note above.
 OXW_DEVICE=cpu
-source /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/_env.sh
+source /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/_env.sh
 python -c "import oxide_workflow, sys; print('python', sys.version.split()[0])"
 
 for env in chgnet orb; do

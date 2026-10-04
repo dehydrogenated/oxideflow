@@ -133,7 +133,7 @@ Adsorbates are placed at approximately the covalent bond length above the surfac
 ## Running on Sockeye (SLURM)
 
 Key paths:
-- `PROJECT=/arc/project/st-akkiraju-1/ssong18` — durable storage; this repo lives at `$PROJECT/fullworkflow`
+- `PROJECT=/arc/project/st-akkiraju-1/ssong18` — durable storage; this repo lives at `$PROJECT/oxideflow`
 - `/scratch/st-akkiraju-1/$USER` — fast, purged-on-a-timer scratch; **all job output must land here**, never `/arc/project`
 - `$PROJECT/miniforge3` — conda base (`OXW_CONDA_BASE`). Verified via `conda env list` on
   the login node (2026-08-19): `oxw` (orchestrator, has `oxide_workflow`+pymatgen installed
@@ -155,14 +155,14 @@ Watch out: the home-ish project dir and the scratch dir both end in `ssong18` as
 
 ```bash
 cd /scratch/st-akkiraju-1/$USER
-sbatch /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/<job>.slurm
+sbatch /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/<job>.slurm
 ```
 
 CPU is the `#SBATCH` default in every job script (`--account=st-akkiraju-1`, `--partition=cascade`). GPU needs a **different account** (the `-gpu` suffix) and explicit flags at submission time — command-line flags beat a script's `#SBATCH` defaults, so no editing is needed to switch:
 
 ```bash
 sbatch --account=st-akkiraju-1-gpu --partition=gpu --gres=gpu:1 --time=6:00:00 \
-       /arc/project/st-akkiraju-1/ssong18/fullworkflow/scripts/slurm/<job>.slurm
+       /arc/project/st-akkiraju-1/ssong18/oxideflow/scripts/slurm/<job>.slurm
 ```
 
 ### Monitoring / canceling
